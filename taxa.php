@@ -1,48 +1,83 @@
 <?php
+$mensagem = "";
 if(isset($_POST["capital"])){
 	$capital=trim($_POST["capital"]);
+	if(empty($capital)){
+		$mensagem = "Capital nao informado.</br>";
+	}else{
+		$dados = "Capital informado: <h9>".$capital."</h9></br>";
+	}
 }
 else{
-	print"Erro.";
+	$mensagem .= $mensagem." Capital nao informado.</br>";
 }
 
 if(isset($_POST['mes'])){
 	$mes=trim($_POST['mes']);
+		if(empty($mes)){
+		$mensagem .= $mensagem." mes nao informado.</br>";
+	}else{
+		$dados .= "Tempo informado: <b>".$mes."</b></br>";
+	}
 }
 else{
-	print"Erro.";
+	$mensagem = $mensagen." Mes nao informado.</br>";
 }
 if(isset($_POST['montante'])){
 	$montante=trim($_POST['montante']);
+			if(empty($montante)){
+		$mensagem .= $mensagem." montante nao informado.</br>";
+	}else{
+		$dados .= "Montante informado: <b>".$montante."</b></br>";
+	}
 }
 else{
-	print"Erro.";
+	$mensagem .= $mensagen." Montante nao informado.</br>";
 }
-$url = 'http://80.241.208.115:32771/juroscompostos/montante';
 
-//Initiate cURL.
-$ch = curl_init($url);
+	 $url = 'http://80.241.208.115:32768/juroscompostos/taxa';
 
-//The JSON data.
-$jsonData = array(
-'capital' => $capital,
-'taxa' => $mes,
-'tempo' => $montante
-);
+		//Initiate cURL.
+		$ch = curl_init($url);
 
-//Encode the array into JSON.
-$jsonDataEncoded = json_encode($jsonData);
+		//The JSON data.
+		$jsonData = array(
+		'montante' => $montante,
+		'capital' => $capital,
+		'tempo' => $mes
+		);
 
-//Tell cURL that we want to send a POST request.
-curl_setopt($ch, CURLOPT_POST, 1);
+		//Encode the array into JSON.
+		$jsonDataEncoded = json_encode($jsonData);
 
-//Attach our encoded JSON string to the POST fields.
-curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+		//Tell cURL that we want to send a POST request.
+		curl_setopt($ch, CURLOPT_POST, 1);
 
-//Set the content type to application/json
-curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-//Execute the request
+		//Attach our encoded JSON string to the POST fields.
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+
+		//Set the content type to application/json
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		//Execute the request
+		//print "Valor da taxa: ";
+		//$result =curl_exec($ch);
+		
+ if($mensagem==""){
+		//print $dados;
+		//print "Valor da taxa: ";
+		//$result =curl_exec($ch);
+print "<div class=\"alert alert-success\">
+  <strong>Dados enviados!</strong></br>".$dados."
+  </br>Valor da taxa:
+</div>";
 $result =curl_exec($ch);
+ }else{
+	 print "<div class=\"alert alert-danger\">
+  <strong>Erro dados não enviados!</strong></br>".$mensagem."
+</div>";
+ }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -57,7 +92,7 @@ $result =curl_exec($ch);
 <body>
 <?php
 //Execute the request
-$result =curl_exec($ch);
+//$result =curl_exec($ch);
 print "<div class=\"modal\" >
     <div class=\"modal-dialog\" role=\"document\">
       <div class=\"modal-content\">
