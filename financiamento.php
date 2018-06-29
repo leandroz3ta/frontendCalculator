@@ -1,9 +1,7 @@
 <?php
-
 ini_set('display_errors',0);
 ini_set('display_startup_erros',0);
 error_reporting(E_ALL);
-
 
 $mensagem = "";
 if(isset($_POST["capital"])){
@@ -41,7 +39,7 @@ else{
 	$mensagem .= $mensagen." Montante nao informado.</br>";
 }
 
-	 $url = 'http://80.241.208.115:32768/juroscompostos/taxa';
+	 $url = 'http://80.241.208.115:32768/juroscompostos/financiamento';
 
 		//Initiate cURL.
 		$ch = curl_init($url);
@@ -96,30 +94,6 @@ $result =curl_exec($ch);
   <link rel="stylesheet" href="theme.css" type="text/css"> </head>
 
 <body>
-<?php
-//Execute the request
-//$result =curl_exec($ch);
-print "<div class=\"modal\" >
-    <div class=\"modal-dialog\" role=\"document\">
-      <div class=\"modal-content\">
-        <div class=\"modal-header\">
-          <h5 class=\"modal-title\">Modal title</h5>
-          <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">
-            <span aria-hidden=\"true\">×</span>
-          </button>
-        </div>
-        <div class=\"modal-body\">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class=\"modal-footer\">
-          <button type=\"button\" class=\"btn btn-primary\">Save changes</button>
-          <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>";
-echo  "<script>alert('Email enviado com Sucesso!);</script>";
-?>
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
     <div class="container">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar3SupportedContent" aria-controls="navbar3SupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,7 +102,7 @@ echo  "<script>alert('Email enviado com Sucesso!);</script>";
       <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3SupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Cálculo de taxas</a>
+            <a class="nav-link" href="#">Cálculo de financiamento</a>
           </li>
         </ul>
       </div>
@@ -138,16 +112,16 @@ echo  "<script>alert('Email enviado com Sucesso!);</script>";
     <div class="container">
       <div class="row w-75">
         <div class="col-md-12">
-          <form class="" action="taxa.php" method="post">
+          <form class="" action="financiamento.php">
             <div class="form-group">
               <label class="">Capital</label>
-              <input type="text" class="form-control" name="capital" placeholder="Informe o capital"> </div>
+              <input type="text" class="form-control" placeholder="Informe o capital"> </div>
             <div class="form-group">
-              <label>Tempo (em meses)</label>
-              <input type="text" class="form-control" name="mes" placeholder="Informe a quantidade de meses"> </div>
+              <label>Taxa</label>
+              <input type="text" class="form-control" placeholder="Informe a taxa"> </div>
             <div class="form-group">
-              <label>Montante</label>
-              <input type="text" class="form-control" name="montante" placeholder="Informe o montante"> </div>
+              <label>Tempo (meses)</label>
+              <input type="text" class="form-control" placeholder="Informe a quantidade de meses"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
           </form>
         </div>
