@@ -4,16 +4,16 @@ ini_set('display_startup_erros',1);
 error_reporting(E_ALL);
 
 $mensagem = "";
-if(isset($_POST["capital"])){
-	$capital=trim($_POST["capital"]);
-	if(empty($capital)){
-		$mensagem = "Capital nao informado.</br>";
+if(isset($_POST["tempo"])){
+	$tempo=trim($_POST["tempo"]);
+	if(empty($tempo)){
+		$mensagem = "tempo nao informado.</br>";
 	}else{
-		$dados = "Capital informado: <h9>".$capital."</h9></br>";
+		$dados = "tempo informado: <h9>".$tempo."</h9></br>";
 	}
 }
 else{
-	$mensagem .= $mensagem." Capital nao informado.</br>";
+	$mensagem .= $mensagem." tempo nao informado.</br>";
 }
 
 if(isset($_POST['taxa'])){
@@ -25,30 +25,30 @@ if(isset($_POST['taxa'])){
 	}
 }
 else{
-	$mensagem = $mensagen." Taxa nao informada.</br>";
+	$mensagem .= $mensagen." Taxa nao informada.</br>";
 }
-if(isset($_POST['mes'])){
-	$mes=trim($_POST['mes']);
-			if(empty($mes)){
-		$mensagem .= $mensagem." mes nao informado.</br>";
+if(isset($_POST['montante'])){
+	$montante=trim($_POST['montante']);
+			if(empty($montante)){
+		$mensagem .= $mensagem." montante nao informado.</br>";
 	}else{
-		$dados .= "mes informado: <b>".$mes."</b></br>";
+		$dados .= "montante informado: <b>".$montante."</b></br>";
 	}
 }
 else{
-	$mensagem .= $mensagen." mes nao informado.</br>";
+	$mensagem .= $mensagen." montante nao informado.</br>";
 }
 
-	 $url = 'http://80.241.208.115:32768/juroscompostos/montante';
+	 $url = 'http://80.241.208.115:32768/juroscompostos/capital';
 
 		//Initiate cURL.
 		$ch = curl_init($url);
 
 		//The JSON data.
 		$jsonData = array(
-		'capital' => $capital,
+		'montante' => $montante,
 		'taxa' => $taxa,
-		'tempo' => $mes
+		'tempo' => $tempo
 		);
 
 		//Encode the array into JSON.
@@ -72,7 +72,7 @@ else{
 		//$result =curl_exec($ch);
 print "<div class=\"alert alert-success\">
   <strong>Dados enviados!</strong></br>".$dados."
-  </br>Valor do montante:
+  </br>Valor do capital:
 </div>";
 $result =curl_exec($ch);
  }else{
@@ -102,7 +102,7 @@ $result =curl_exec($ch);
       <div class="collapse navbar-collapse text-center justify-content-center" id="navbar3SupportedContent">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Cálculo de montante</a>
+            <a class="nav-link" href="#">Cálculo de capital</a>
           </li>
         </ul>
       </div>
@@ -112,16 +112,16 @@ $result =curl_exec($ch);
     <div class="container">
       <div class="row w-75">
         <div class="col-md-12">
-          <form class="" action="montante.php" method="post">
+          <form class="" action="capital.php" method="post">
             <div class="form-group">
-              <label class="">Capital</label>
-              <input type="text" class="form-control" name="capital" placeholder="Informe o capital"> </div>
+              <label class="">Tempo(Meses)</label>
+              <input type="text" class="form-control" name="tempo" placeholder="Informe o tempo"> </div>
             <div class="form-group">
               <label>Taxa</label>
               <input type="text" class="form-control" name="taxa" placeholder="Informe a taxa"> </div>
             <div class="form-group">
-              <label>Tempo (meses)</label>
-              <input type="text" class="form-control" name="mes" placeholder="Informe a quantidade de meses"> </div>
+              <label>Montante</label>
+              <input type="text" class="form-control" name="montante" placeholder="Informe o montante"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
 			<button type="button" class="btn btn-primary" onClick="limpa()">Limpar</button>
 			<a class="ml-3 btn navbar-btn btn-primary" href="opcoes.html">Voltar</a>
