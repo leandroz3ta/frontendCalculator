@@ -141,15 +141,15 @@ echo  "<script>alert('Email enviado com Sucesso!);</script>";
           <form class="" action="taxa.php" method="post">
             <div class="form-group">
               <label class="">Capital</label>
-              <input type="text" class="form-control" name="capital" placeholder="Informe o capital"> </div>
+              <input type="text" class="form-control" id="myInput" name="capital" placeholder="Informe o capital"> </div>
             <div class="form-group">
               <label>Tempo (em meses)</label>
-              <input type="text" class="form-control" name="mes" placeholder="Informe a quantidade de meses"> </div>
+              <input type="text" class="form-control" id="myInput" name="mes" placeholder="Informe a quantidade de meses"> </div>
             <div class="form-group">
               <label>Montante</label>
-              <input type="text" class="form-control" name="montante" placeholder="Informe o montante"> </div>
+              <input type="text" class="form-control" id="myInput" name="montante" placeholder="Informe o montante"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
-			<button type="button" class="btn btn-primary" onClick="limpa()">Limpar</button>
+			<button class="btn btn-primary" onclick="document.getElementById('myInput').value = ''">Limpar</button>
 			<a class="ml-3 btn navbar-btn btn-primary" href="opcoes.html">Voltar</a>
           </form>
         </div>

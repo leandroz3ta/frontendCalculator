@@ -127,18 +127,18 @@ $result =curl_exec($ch);
           <form class="" action="financiamento.php" method="post">
             <div class="form-group">
               <label class="">Valor do bem</label>
-              <input type="text" class="form-control" name="valorDoBem" placeholder="Informe o valor"> </div>
+              <input type="text" class="form-control" id="myInput" name="valorDoBem" placeholder="Informe o valor"> </div>
             <div class="form-group">
               <label>Taxa</label>
-              <input type="text" class="form-control" name="taxa" placeholder="Informe a taxa"> </div>
+              <input type="text" class="form-control" id="myInput" name="taxa" placeholder="Informe a taxa"> </div>
             <div class="form-group">
               <label>Tempo (meses)</label>
-              <input type="text" class="form-control" name="tempo" placeholder="Informe a quantidade de meses"> </div>
+              <input type="text" class="form-control" id="myInput" name="tempo" placeholder="Informe a quantidade de meses"> </div>
 			<div class="form-group">
               <label>Entrada</label>
-              <input type="text" class="form-control" name="entrada" placeholder="Informe o valor da entrada"> </div>
+              <input type="text" class="form-control" id="myInput" name="entrada" placeholder="Informe o valor da entrada"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
-			<button type="button" class="btn btn-primary" onClick="limpa()">Limpar</button>
+			<button class="btn btn-primary" onclick="document.getElementById('myInput').value = ''">Limpar</button>
 			<a class="ml-3 btn navbar-btn btn-primary" href="opcoes.html">Voltar</a>
           </form>
         </div>

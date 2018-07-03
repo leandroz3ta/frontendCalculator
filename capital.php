@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors',1);
-ini_set('display_startup_erros',1);
+ini_set('display_errors',0);
+ini_set('display_startup_erros',0);
 error_reporting(E_ALL);
 
 $mensagem = "";
@@ -115,15 +115,15 @@ $result =curl_exec($ch);
           <form class="" action="capital.php" method="post">
             <div class="form-group">
               <label class="">Tempo(Meses)</label>
-              <input type="text" class="form-control" name="tempo" placeholder="Informe o tempo"> </div>
+              <input type="text" class="form-control" id="myInput" name="tempo" placeholder="Informe o tempo"> </div>
             <div class="form-group">
               <label>Taxa</label>
-              <input type="text" class="form-control" name="taxa" placeholder="Informe a taxa"> </div>
+              <input type="text" class="form-control" id="myInput" name="taxa" placeholder="Informe a taxa"> </div>
             <div class="form-group">
               <label>Montante</label>
-              <input type="text" class="form-control" name="montante" placeholder="Informe o montante"> </div>
+              <input type="text" class="form-control" id="myInput" name="montante" placeholder="Informe o montante"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
-			<button type="button" class="btn btn-primary" onClick="limpa()">Limpar</button>
+			<button class="btn btn-primary" onclick="document.getElementById('myInput').value = ''">Limpar</button>
 			<a class="ml-3 btn navbar-btn btn-primary" href="opcoes.html">Voltar</a>
           </form>
         </div>
