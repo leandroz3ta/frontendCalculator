@@ -4,51 +4,64 @@ ini_set('display_startup_erros',0);
 error_reporting(E_ALL);
 
 $mensagem = "";
-if(isset($_POST["capital"])){
-	$capital=trim($_POST["capital"]);
-	if(empty($capital)){
-		$mensagem = "Capital nao informado.</br>";
+if(isset($_POST["valorDoBem"])){
+	$valor1=trim($_POST["valorDoBem"]);
+	if(empty($valor1)){
+		$mensagem = "valor do Bem nao informado.</br>";
 	}else{
-		$dados = "Capital informado: <h9>".$capital."</h9></br>";
+		$dados = "valor do bem informado: <h9>".$valor1."</h9></br>";
 	}
 }
 else{
-	$mensagem .= $mensagem." Capital nao informado.</br>";
+	$mensagem .= $mensagem." valor do Bem nao informado.</br>";
 }
 
-if(isset($_POST['mes'])){
-	$mes=trim($_POST['mes']);
-		if(empty($mes)){
-		$mensagem .= $mensagem." mes nao informado.</br>";
+if(isset($_POST['tempo'])){
+	$valor2=trim($_POST['tempo']);
+		if(empty($valor2)){
+		$mensagem .= $mensagem." tempo nao informado.</br>";
 	}else{
-		$dados .= "Tempo informado: <b>".$mes."</b></br>";
+		$dados .= "Tempo informado: <b>".$valor2."</b></br>";
 	}
 }
 else{
-	$mensagem = $mensagen." Mes nao informado.</br>";
+	$mensagem .= $mensagen." Tempo nao informado.</br>";
 }
-if(isset($_POST['montante'])){
-	$montante=trim($_POST['montante']);
-			if(empty($montante)){
-		$mensagem .= $mensagem." montante nao informado.</br>";
+if(isset($_POST['taxa'])){
+	$valor3=trim($_POST['taxa']);
+			if(empty($valor3)){
+		$mensagem .= $mensagem." taxa nao informada.</br>";
 	}else{
-		$dados .= "Montante informado: <b>".$montante."</b></br>";
+		$dados .= "Taxa informada: <b>".$valor3."</b></br>";
 	}
 }
 else{
-	$mensagem .= $mensagen." Montante nao informado.</br>";
+	$mensagem .= $mensagen." Taxa nao informada.</br>";
 }
 
-	 $url = 'http://80.241.208.115:32768/juroscompostos/financiamento';
+if(isset($_POST['entrada'])){
+	$valor4=trim($_POST['entrada']);
+			if(empty($valor4)){
+		$mensagem .= $mensagem." Entrada nao informada.</br>";
+	}else{
+		$dados .= "Entrada informada: <b>".$valor4."</b></br>";
+	}
+}
+else{
+	$mensagem .= $mensagen." Entrada nao informada.</br>";
+}
+
+	 $url = 'http://80.241.208.115:32768/financiamento/entrada';
 
 		//Initiate cURL.
 		$ch = curl_init($url);
 
 		//The JSON data.
 		$jsonData = array(
-		'montante' => $montante,
-		'capital' => $capital,
-		'tempo' => $mes
+		'valorBem' => $valor1,
+		'tempo' => $valor2,
+		'taxa' => $valor3,
+		'entrada' => $valor4,
 		);
 
 		//Encode the array into JSON.
@@ -72,7 +85,7 @@ else{
 		//$result =curl_exec($ch);
 print "<div class=\"alert alert-success\">
   <strong>Dados enviados!</strong></br>".$dados."
-  </br>Valor da taxa:
+  </br>Valor da parcela:
 </div>";
 $result =curl_exec($ch);
  }else{
@@ -86,7 +99,6 @@ $result =curl_exec($ch);
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -112,17 +124,22 @@ $result =curl_exec($ch);
     <div class="container">
       <div class="row w-75">
         <div class="col-md-12">
-          <form class="" action="financiamento.php">
+          <form class="" action="financiamento.php" method="post">
             <div class="form-group">
-              <label class="">Capital</label>
-              <input type="text" class="form-control" placeholder="Informe o capital"> </div>
+              <label class="">Valor do bem</label>
+              <input type="text" class="form-control" name="valorDoBem" placeholder="Informe o valor"> </div>
             <div class="form-group">
               <label>Taxa</label>
-              <input type="text" class="form-control" placeholder="Informe a taxa"> </div>
+              <input type="text" class="form-control" name="taxa" placeholder="Informe a taxa"> </div>
             <div class="form-group">
               <label>Tempo (meses)</label>
-              <input type="text" class="form-control" placeholder="Informe a quantidade de meses"> </div>
+              <input type="text" class="form-control" name="tempo" placeholder="Informe a quantidade de meses"> </div>
+			<div class="form-group">
+              <label>Entrada</label>
+              <input type="text" class="form-control" name="entrada" placeholder="Informe o valor da entrada"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
+			<button type="button" class="btn btn-primary" onClick="limpa()">Limpar</button>
+			<a class="ml-3 btn navbar-btn btn-primary" href="opcoes.html">Voltar</a>
           </form>
         </div>
       </div>
@@ -134,6 +151,14 @@ $result =curl_exec($ch);
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
     <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
   </pingendo>
+    <script>
+function limpa() {
+if(document.getElementById('capital').value!="") {
+document.getElementById('taxa').value="";
+document.getElementById('mes').value="";
+}
+}
+</script>
 </body>
 
 </html>

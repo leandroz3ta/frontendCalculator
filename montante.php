@@ -112,17 +112,19 @@ $result =curl_exec($ch);
     <div class="container">
       <div class="row w-75">
         <div class="col-md-12">
-          <form class="" action="montante.php">
+          <form class="" action="montante.php" method="post">
             <div class="form-group">
               <label class="">Capital</label>
-              <input type="text" class="form-control" placeholder="Informe o capital"> </div>
+              <input type="text" class="form-control" name="capital" placeholder="Informe o capital"> </div>
             <div class="form-group">
               <label>Taxa</label>
-              <input type="text" class="form-control" placeholder="Informe a taxa"> </div>
+              <input type="text" class="form-control" name="taxa" placeholder="Informe a taxa"> </div>
             <div class="form-group">
               <label>Tempo (meses)</label>
-              <input type="text" class="form-control" placeholder="Informe a quantidade de meses"> </div>
+              <input type="text" class="form-control" mes="mes" placeholder="Informe a quantidade de meses"> </div>
             <button type="submit" class="btn btn-primary">Calcular</button>
+			<button type="button" class="btn btn-primary" onClick="limpa()">Limpar</button>
+			<a class="ml-3 btn navbar-btn btn-primary" href="opcoes.html">Voltar</a>
           </form>
         </div>
       </div>
@@ -134,6 +136,15 @@ $result =curl_exec($ch);
   <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:180px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo&nbsp;&nbsp;
     <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16">
   </pingendo>
+  
+      <script>
+function limpa() {
+if(document.getElementById('capital').value!="") {
+document.getElementById('taxa').value="";
+document.getElementById('mes').value="";
+}
+}
+</script>
 </body>
 
 </html>
